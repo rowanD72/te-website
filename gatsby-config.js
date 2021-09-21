@@ -1,14 +1,22 @@
+require('dotenv').config()
+
 module.exports = {
   siteMetadata: {
-    siteUrl: "https://www.yourdomain.tld",
-    title: "te-site",
+    siteUrl: "https://www.tranquilessencecandlecompany.com",
+    title: "tranquil essence candle company",
+    icon: "./src/images/tranquil_ess_logo_transparent.png",
+    description: "Homemade candles for your home, office, or spa. We make candles for all occassions.",
+    author: "David Rowan III"
   },
   plugins: [
     {
       resolve: "gatsby-source-shopify",
       options: {
-        shopName: "tranquil-essence-candle-company.myshopify.com",
-        accessToken: "",
+        password: process.env.GATSBY_SHOP_PASSWORD,
+        storeUrl: process.env.GATSBY_SHOPIFY_STORE_URL,
+        apiKey: process.env.GATSBY_ADMIN_API_KEY,
+        shopifyConnections: ["collections", "orders"],
+        downloadImages: true
       },
     },
     "gatsby-plugin-sass",
