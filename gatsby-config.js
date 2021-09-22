@@ -15,7 +15,7 @@ module.exports = {
         password: process.env.GATSBY_SHOP_PASSWORD,
         storeUrl: process.env.GATSBY_SHOPIFY_STORE_URL,
         apiKey: process.env.GATSBY_ADMIN_API_KEY,
-        shopifyConnections: ["collections", "orders"],
+        shopifyConnections: ["orders", "locations"],
         downloadImages: true
       },
     },
