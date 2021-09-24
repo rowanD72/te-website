@@ -2,11 +2,11 @@ require('dotenv').config()
 
 module.exports = {
   siteMetadata: {
-    siteUrl: "https://www.tranquilessencecandlecompany.com",
-    title: "tranquil essence candle company",
-    icon: "./src/images/tranquil_ess_logo_transparent.png",
-    description: "Homemade candles for your home, office, or spa. We make candles for all occassions.",
-    author: "David Rowan III"
+    siteUrl: `https://www.tranquilessencecandlecompany.com`,
+    title: `tranquil essence candle company`,
+    icon: `./src/images/tranquil_ess_logo_transparent.png`,
+    description: `Homemade candles for your home, office, or spa. We make candles for all occassions.`,
+    author: `David Rowan III`
   },
   plugins: [
     {
