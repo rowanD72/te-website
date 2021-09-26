@@ -3,29 +3,34 @@ import { graphql } from 'gatsby'
 import SEO from '../components/seo'
 import Layout from '../components/Layout'
 import { Link } from 'gatsby'
+import { GatsbyImage } from 'gatsby-plugin-image'
 
-const products = ({ data }) => {
+
+const Products = ({ data }) => {
     return (
         <Layout>
             <SEO title='Products' />
                 <h1>Products</h1>
-                <ul>
-                    {data.allShopifyProduct.edges.map(({ node }) => (
-                        <li key={node.shopifyId}>
-                            <h3>
-                                <Link to={`/products/${node.handle}`}>{node.title}</Link>
-                                {' - '}${node.priceRangeV2.minVariantPrice.amount}
-                            </h3>
-                            <p>{node.description}</p>
-                        </li>
+                <main>
+                    {data.allShopifyProduct.edges.map(({ node: product }) => (
+                        <Link>
+                            <GatsbyImage 
+                                image={product.featuredImage.gatsbyImageData} 
+                                alt={product.title}
+                            />
+                            <h2>{product.title}</h2>
+                            <p>{product.description}</p>
+                            <h4>{product.priceRangeV2.minVariantPrice.amount}</h4>
+                            
+                        </Link>
                     ))}
-                </ul>
+                </main>
             <Link to='/'>Link to home page</Link>
         </Layout>
     )
 }
 
-export default products
+export default Products
 
 //GraphQL 
 export const query = graphql`  
@@ -40,8 +45,17 @@ export const query = graphql`
                     priceRangeV2 {
                         minVariantPrice {
                             amount
+                            currencyCode
                         }
                     }
+                    featuredImage {
+                        localFile {
+                            childrenImageSharp {
+                                gatsbyImageData(aspectRatio: 1,  width: 640)
+                            }
+                        }
+                    }
+                    handle
                 }
             }
         }
