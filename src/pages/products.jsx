@@ -5,7 +5,6 @@ import Layout from '../components/Layout'
 import { Link } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 
-
 const Products = ({ data }) => {
     return (
         <Layout>
@@ -14,15 +13,21 @@ const Products = ({ data }) => {
                 <main>
                     {data.allShopifyProduct.edges.map(({ node: product }) => (
                         <Link>
-                            <GatsbyImage 
-                                image={product.featuredImage.gatsbyImageData} 
-                                alt={product.title}
-                            />
-                            <h2>{product.title}</h2>
-                            <p>{product.description}</p>
-                            <h4>{product.priceRangeV2.minVariantPrice.amount}</h4>
-                            
+                        <div>
+                            <GatsbyImage image={product.images[0].localFile.childImageSharp.gatsbyImageData} alt={product.title} />
+                        </div>
+                             <div>
+                                <h2>{product.title}</h2>
+                                <p>{product.description}</p>
+                            </div>
+                            <div>
+                                    {
+                                        product.priceRangeV2.maxVariantPrice.currencyCode,
+                                        product.priceRangeV2.maxVariantPrice.amount
+                                    }      
+                            </div>
                         </Link>
+                           
                     ))}
                 </main>
             <Link to='/'>Link to home page</Link>
@@ -35,29 +40,26 @@ export default Products
 //GraphQL 
 export const query = graphql`  
     {
-        allShopifyProduct(sort: { fields: [title] }) {
+        allShopifyProduct {
             edges {
-                node {
-                    title
-                    shopifyId
-                    description
-                    handle
-                    priceRangeV2 {
-                        minVariantPrice {
-                            amount
-                            currencyCode
-                        }
-                    }
-                    featuredImage {
-                        localFile {
-                            childrenImageSharp {
-                                gatsbyImageData(aspectRatio: 1,  width: 640)
-                            }
-                        }
-                    }
-                    handle
+              node {
+                title
+                description
+                priceRangeV2 {
+                  maxVariantPrice {
+                    amount
+                    currencyCode
+                  }
                 }
+                images {
+                  localFile {
+                    childImageSharp {
+                      gatsbyImageData(aspectRatio: 1, width: 640)
+                    }
+                  }
+                }
+              }
             }
-        }
+          }
     }
 `
