@@ -5,12 +5,14 @@ import Layout from '../components/Layout'
 import { Link } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 
+import { productGrid } from '../components/styles/products.module.scss'
+
 const Products = ({ data }) => {
     return (
         <Layout>
             <SEO title='Products' />
                 <h1>Products</h1>
-                <main>
+                <main className={productGrid}>
                     {data.allShopifyProduct.edges.map(({ node: product }) => (
                         <Link>
                         <div>
