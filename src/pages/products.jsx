@@ -15,9 +15,9 @@ const Products = ({ data }) => {
                 <main className={productGrid}>
                     {data.allShopifyProduct.edges.map(({ node: product }) => (
                         <Link>
-                        <div>
-                            <GatsbyImage image={product.images[0].localFile.childImageSharp.gatsbyImageData} alt={product.title} />
-                        </div>
+                            <div>
+                                <GatsbyImage image={product.images[0].localFile.childImageSharp.gatsbyImageData} alt={product.title} />
+                            </div>
                              <div>
                                 <h2>{product.title}</h2>
                                 <p>{product.description}</p>
@@ -29,7 +29,6 @@ const Products = ({ data }) => {
                                     }      
                             </div>
                         </Link>
-                           
                     ))}
                 </main>
             <Link to='/'>Link to home page</Link>
@@ -42,26 +41,27 @@ export default Products
 //GraphQL 
 export const query = graphql`  
     {
-        allShopifyProduct {
-            edges {
-              node {
-                title
-                description
-                priceRangeV2 {
-                  maxVariantPrice {
-                    amount
-                    currencyCode
-                  }
-                }
-                images {
-                  localFile {
-                    childImageSharp {
-                      gatsbyImageData(aspectRatio: 1, width: 640)
-                    }
-                  }
+      allShopifyProduct {
+        edges {
+          node {
+            id
+            title
+            description
+            priceRangeV2 {
+              maxVariantPrice {
+                amount
+                currencyCode
+              }
+            }
+            images {
+              localFile {
+                childImageSharp {
+                  gatsbyImageData(aspectRatio: 1, width: 640)
                 }
               }
             }
           }
+        }
+      }
     }
 `
